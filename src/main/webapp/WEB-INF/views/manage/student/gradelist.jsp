@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 23577
-  Date: 2018/7/28
-  Time: 11:28
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -17,19 +11,6 @@
         <script type="application/javascript">
 
 
-            function dele(stuDel) {
-                var tds = stuDel.parentElement.parentElement.children;
-                var id = (tds[2]).innerHTML;
-                if (confirm("确认删除吗")) {
-                    //alert("yes");
-                    alert("确定删除id为: " + id + "的用户？");
-                    window.location.href = "student/studentDel.do?id=" + id;
-                }
-                else {
-                    //alert("no")
-                    return;
-                }
-            }
 
             jQuery(function ($) {
                 //datepicker plugin
@@ -113,31 +94,23 @@
                                     <thead>
                                         <%--列表信息---->thead--%>
                                     <tr>
-                                        <th class="center">
-                                            <label class="pos-rel">
-                                                <input type="checkbox" class="ace"/>
-                                                <span class="lbl"></span>
-                                            </label>
-                                        </th>
-                                        <th></th>
                                         <th class="hidden-480">序号</th>
                                         <th class="hidden-480">班级名</th>
                                         <th class="hidden-480">人数</th>
+                                        <th></th>
                                         <th class="hidden-480">平均分</th>
-                                        <th class="hidden-480">修改、删除</th>
-
                                     </tr>
                                     </thead>
                                     <tbody>
                                         <%--列表信息---->tbody--%>
-                                    <c:forEach items="${gradeList}" var="gradeList">
+                                    <%--@elvariable id="gradenameList" type="java.util.List"--%>
+                                        <c:set var="index" value="0" />
+                                        <c:forEach items="${gradenameList}" var="gradename" varStatus="list">
                                         <tr>
-                                            <td class="center">
-                                                <label class="pos-rel">
-                                                    <input type="checkbox" class="ace"/>
-                                                    <span class="lbl"></span>
-                                                </label>
-                                            </td>
+                                            <c:set var="index" value="${index+1}" />
+                                            <td>${index}</td>
+                                            <td>${gradenameList[list.count-1]}</td>
+                                            <td>${(integerList[list.count-1])+1}</td>
                                             <td class="center">
                                                 <div class="action-buttons">
                                                     <a href="#" class="green bigger-140 show-details-btn"
@@ -147,50 +120,11 @@
                                                     </a>
                                                 </div>
                                             </td>
-                                            <td>${gradeList.id}</td>
-                                            <td>${gradeList.name}</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                                <div>
-                                                    <button class="btn btn-xs btn-info">
-                                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                                    </button>
-                                                <button class="btn btn-xs btn-danger" name="stuDel"
-                                                        onclick="dele(this)">
-                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                                </button>
-                                                </div>
-                                            </td>
+                                            <td>平均分</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
                                 </table>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <div class="dataTables_info" id="dynamic-table_info" role="status"
-                                             aria-live="polite">第 ${Number+1} 页 ，共${TotalElements}条
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="dataTables_paginate paging_simple_numbers"
-                                             id="dynamic-table_paginate">
-                                            <ul class="pagination">
-                                                <li class="paginate_button previous disabled"
-                                                    aria-controls="dynamic-table" tabindex="0"
-                                                    id="dynamic-table_previous"><a href="student/studentMessagePage.do?Number=${Number-1}">上一页</a></li>
-                                                <li class="paginate_button" aria-controls="dynamic-table"
-                                                    tabindex="0"><a href="student/studentMessagePage.do?Number=${Number-1}">${Number-1}</a></li>
-                                                <li class="paginate_button active " aria-controls="dynamic-table" tabindex="0">
-                                                    <a href="#">${Number}</a></li>
-                                                <li class="paginate_button " aria-controls="dynamic-table" tabindex="0">
-                                                    <a href="student/studentMessagePage.do?Number=${Number+1}">${Number+1}</a></li>
-                                                <li class="paginate_button next" aria-controls="dynamic-table"
-                                                    tabindex="0" id="dynamic-table_next"><a href="student/studentMessagePage.do?Number=${Number+1}">下一页</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
                             </div><!-- /.span -->
                         </div><!-- /.row -->
                         <!-- PAGE CONTENT ENDS -->

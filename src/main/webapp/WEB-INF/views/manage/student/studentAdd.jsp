@@ -43,7 +43,7 @@
                             </span>
                             </h3>
 
-                            <form action="student/doStudentAdd.do" method="post" class="form-horizontal" role="form"
+                            <form action="manage/student/doStudentAdd.do" method="post" class="form-horizontal" role="form"
                                   id="admin-add-form">
 
                                 <%--用户名不能为空--%>

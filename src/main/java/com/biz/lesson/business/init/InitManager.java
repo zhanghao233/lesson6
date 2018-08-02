@@ -88,11 +88,11 @@ public class InitManager {
             menuItemAccessLog = menuItemRepository.save(menuItemAccessLog);
 
             //Menu Item-----学生管理系统---------------
-            MenuItem menuItemOfStudent = buildMenuItem("学生管理", "StudentManage", "OPT_STUDENT_SEARCH", 5, "/student/studentMessage.do", mainMenu1);
+            MenuItem menuItemOfStudent = buildMenuItem("学生管理", "StudentManage", "OPT_STUDENT_SEARCH", 5, "/manage/student/studentlist.do", mainMenu1);
             menuItemOfStudent = menuItemRepository.save(menuItemOfStudent);
-            MenuItem menuItemOfGrade = buildMenuItem("班级管理", "GradeManage", "OPT_GRADE_SEARCH", 6, "/student/studentMessage.do", mainMenu1);
+            MenuItem menuItemOfGrade = buildMenuItem("班级管理", "GradeManage", "OPT_GRADE_SEARCH", 6, "/manage/grade/gradelist.do", mainMenu1);
             menuItemOfGrade = menuItemRepository.save(menuItemOfGrade);
-            MenuItem menuItemOfSubject = buildMenuItem("学科管理", "SubjectManage", "OPT_SUBJECT_SEARCH", 7, "/student/studentMessage.do", mainMenu1);
+            MenuItem menuItemOfSubject = buildMenuItem("学科管理", "SubjectManage", "OPT_SUBJECT_SEARCH", 7, "/manage/subject/sublistnum.do", mainMenu1);
             menuItemOfSubject = menuItemRepository.save(menuItemOfSubject);
 
             

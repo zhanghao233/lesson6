@@ -1,6 +1,5 @@
 package com.biz.lesson.model.student;
 
-import com.biz.lesson.model.user.Resource;
 
 import javax.persistence.*;
 import java.io.Serializable;

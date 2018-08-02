@@ -664,7 +664,7 @@ public class StudentController {
         modelAndView.setViewName("manage/student/studentAdd");
         return modelAndView;
     }
-    @RequestMapping("doStudentAdd")
+    @RequestMapping("/doStudentAdd")
     public ModelAndView doAdd() throws ParseException {
         String name = request.getParameter("name");
         String code = request.getParameter("code");
@@ -699,7 +699,7 @@ public class StudentController {
         return modelAndView;
     }
 
-    @RequestMapping("studentDel")
+    @RequestMapping("/studentDel")
     public ModelAndView deleteStudentById(){
         Integer id = Integer.parseInt(request.getParameter("id"));
         studentService.deleteById(id);

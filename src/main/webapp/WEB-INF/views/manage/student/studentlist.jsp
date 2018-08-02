@@ -40,19 +40,6 @@
 
             });
 
-            function dele(stuDel) {
-                var tds = stuDel.parentElement.parentElement.children;
-                var id = (tds[2]).innerHTML;
-                if (confirm("确认删除吗")) {
-                    //alert("yes");
-                    alert("确定删除id为: " + id + "的用户？");
-                    window.location.href = "student/studentDel.do?id=" + id;
-                }
-                else {
-                    //alert("no")
-                    return;
-                }
-            }
 
             jQuery(function ($) {
                 //datepicker plugin
@@ -177,7 +164,8 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="manage/student/studentAdd.do" style="float: right" class="btn btn-sm btn-primary"><i
+                                <a href="manage/student/studentAdd.do" style="float: right"
+                                   class="btn btn-sm btn-primary"><i
                                         class="ace-icon glyphicon glyphicon-plus"></i>新增</a>
                             </td>
                             <td>
@@ -215,7 +203,6 @@
                                         <th class="hidden-480">分数录入</th>
                                         <th class="hidden-480">选课</th>
                                         <th class="hidden-480">修改、删除</th>
-
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -272,12 +259,14 @@
                                                     <button class="btn btn-xs btn-info">
                                                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                                                     </button>
-                                                <button class="btn btn-xs btn-danger" name="stuDel"
-                                                        onclick="dele(this)">
-                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                                </button>
+                                                    <a href="manage/student/studentDel.do?id=${students.id}">
+                                                    <button class="btn btn-xs btn-danger" name="stuDel"
+                                                            onclick="return confirm('您确定要删除【${students.name}】吗？')">
+                                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                    </button></a>
                                                 </div>
                                             </td>
+
                                         </tr>
                                         <%--下拉列表--%>
                                         <tr class="detail-row">
@@ -367,24 +356,71 @@
                                 <div class="row">
                                     <div class="col-xs-6">
                                         <div class="dataTables_info" id="dynamic-table_info" role="status"
-                                             aria-live="polite">第 ${Number+1} 页，有${NumberOfElements}条 ，总共${TotalElements}条
+                                             aria-live="polite">第 ${Number+1} 页，有${NumberOfElements}条
+                                            ，总共${TotalElements}条
                                         </div>
                                     </div>
                                     <div class="col-xs-6">
                                         <div class="dataTables_paginate paging_simple_numbers"
                                              id="dynamic-table_paginate">
                                             <ul class="pagination">
-                                                <li class="paginate_button previous disabled"
-                                                    aria-controls="dynamic-table" tabindex="0"
-                                                    id="dynamic-table_previous"><a href="student/studentlistPage.do?Number=${Number-1}">上一页</a></li>
-                                                <li class="paginate_button" aria-controls="dynamic-table"
-                                                    tabindex="0"><a href="student/studentlistPage.do?Number=${Number-1}">${Number}</a></li>
-                                                <li class="paginate_button active " aria-controls="dynamic-table" tabindex="0">
-                                                    <a href="#">${Number+1}</a></li>
-                                                <li class="paginate_button " aria-controls="dynamic-table" tabindex="0">
-                                                    <a href="student/studentlistPage.do?Number=${Number+1}">${Number+2}</a></li>
-                                                <li class="paginate_button next" aria-controls="dynamic-table"
-                                                    tabindex="0" id="dynamic-table_next"><a href="student/studentlistPage.do?Number=${Number+1}">下一页</a></li>
+                                                <c:choose>
+                                                    <c:when test="${Number<1}">
+                                                        <li class="paginate_button previous disabled"
+                                                            aria-controls="dynamic-table" tabindex="0"
+                                                            id="dynamic-table_previous"><a
+                                                                href="manage/student/studentlistPage.do?Number=${Number-1}">上一页</a>
+                                                        </li>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <li class="paginate_button previous"
+                                                            aria-controls="dynamic-table" tabindex="0"
+                                                            id="dynamic-table_previous"><a
+                                                                href="manage/student/studentlistPage.do?Number=${Number-1}">上一页</a>
+                                                        </li>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <c:choose>
+                                                    <c:when test="${Number<1}">
+                                                        <li class="paginate_button active" aria-controls="dynamic-table" tabindex="0">
+                                                            <a href="manage/student/studentlistPage.do?Number=${Number}">${Number+1}</a></li>
+                                                        <li class="paginate_button" aria-controls="dynamic-table" tabindex="0">
+                                                            <a href="manage/student/studentlistPage.do?Number=${Number+1}">${Number+2}</a></li>
+                                                        <li class="paginate_button" aria-controls="dynamic-table" tabindex="0">
+                                                            <a href="manage/student/studentlistPage.do?Number=${Number+2}">${Number+3}</a></li>
+                                                    </c:when>
+                                                    <c:when test="${Number+2>TotalPages}">
+                                                        <li class="paginate_button" aria-controls="dynamic-table" tabindex="0">
+                                                            <a href="manage/student/studentlistPage.do?Number=${Number-2}">${Number-1}</a></li>
+                                                        <li class="paginate_button" aria-controls="dynamic-table" tabindex="0">
+                                                            <a href="manage/student/studentlistPage.do?Number=${Number-1}">${Number}</a></li>
+                                                        <li class="paginate_button active " aria-controls="dynamic-table" tabindex="0">
+                                                            <a href="manage/student/studentlistPage.do?Number=${Number}">${Number+1}</a></li>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <li class="paginate_button" aria-controls="dynamic-table" tabindex="0">
+                                                            <a href="manage/student/studentlistPage.do?Number=${Number-1}">${Number}</a></li>
+                                                        <li class="paginate_button active " aria-controls="dynamic-table" tabindex="0">
+                                                            <a href="manage/student/studentlistPage.do?Number=${Number}">${Number+1}</a></li>
+                                                        <li class="paginate_button " aria-controls="dynamic-table" tabindex="0">
+                                                            <a href="manage/student/studentlistPage.do?Number=${Number+1}">${Number+2}</a></li>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <c:choose>
+                                                    <c:when test="${Number+2>TotalPages}">
+                                                        <li class="paginate_button next disabled" aria-controls="dynamic-table"
+                                                            tabindex="0" id="dynamic-table_next"><a
+                                                                href="manage/student/studentlistPage.do?Number=${Number+1}">下一页</a>
+                                                        </li>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <li class="paginate_button next" aria-controls="dynamic-table"
+                                                            tabindex="0" id="dynamic-table_next"><a
+                                                                href="manage/student/studentlistPage.do?Number=${Number+1}">下一页</a>
+                                                        </li>
+                                                    </c:otherwise>
+                                                </c:choose>
+
                                             </ul>
                                         </div>
                                     </div>

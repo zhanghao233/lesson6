@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -25,9 +26,18 @@ public class GradeService {
     private GradeCrudRepository gradeCrudRepository;
     @Autowired
     private GradePagingAndSortingRepository gradePagingAndSortingRepository;
+
     public void save(List<Grade> gradeList){
         gradeCrudRepository.save(gradeList);
 
+    }
+    @Transactional
+    public List<String> findAllname(){
+        return  gradeRepository.findAllname();
+    }
+    @Transactional
+    public List<BigInteger> findNumByGradeName(){
+        return  gradeRepository.findNumByGradeName();
     }
     @Transactional
     public Page<Grade> pageList(Integer number) {

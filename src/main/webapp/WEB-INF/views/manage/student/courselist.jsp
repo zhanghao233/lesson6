@@ -120,74 +120,9 @@
                             <%--根据条件查询--%>
                         <tr>
                             <td>
-                                <div class="col-sm-3">
-                                    <div class="input-group" style="width: 80%">
-                                        <input type="text" autocomplete="off"
-                                               name="userCode" id="userCode"
-                                               maxlength="20" value="${code}"
-                                               class="required form-control"/>
-                                        <span class="input-group-btn" style="margin-left: auto">
-                                             <button class="btn btn-sm btn-primary " onclick="searchId();"
-                                                     type="button">
-                                                 <i class="ace-icon fa fa-check-circle-o"></i>
-                                                 <spring:message code="student.info.serch"/>
-                                             </button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="width: 10%">
-                                <div class="col-sm-3">
-                                    <div class="input-group" style="width: 80%">
-                                        <input type="text" autocomplete="off"
-                                               name="userName" id="userName"
-                                               maxlength="20" value="${name}"
-                                               class="required form-control"/>
-                                        <span class="input-group-btn">
-                                             <button class="btn btn-sm btn-primary " onclick="searchName();"
-                                                     type="button">
-                                                 <i class="ace-icon fa fa-check-circle-o"></i>
-                                                 <spring:message code="student.info.serch"/>
-                                             </button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col-sm-3">
-                                    <div class="input-group">
-                                        <div class="row">
-                                            <div class="col-xs-8 col-sm-11">
-                                                <div class="input-daterange input-group">
-                                                    <input type="text" class="input-sm form-control"
-                                                           data-date-format="yyyy-mm-dd" style="width: 100px;"
-                                                           name="lastBirthday" id="lastBirthday" placeholder="开始时间"
-                                                           value="${lastBirthday}"/>
-                                                    <span class="input-group-addon">
-																		<i class="fa fa-exchange"></i>
-																	</span>
-                                                    <input type="text" class="input-sm form-control"
-                                                           data-date-format="yyyy-mm-dd" style="width: 100px;"
-                                                           name="nextBirthday" id="nextBirthday" placeholder="结束时间"
-                                                           value="${nextBirthday}"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <a href="manage/student/studentAdd.do" style="float: right" class="btn btn-sm btn-primary"><i
+                                <a href="manage/student/studentAdd.do" style="float: right"
+                                   class="btn btn-sm btn-primary"><i
                                         class="ace-icon glyphicon glyphicon-plus"></i>新增</a>
-                            </td>
-                            <td>
-                                <div>
-                                    <button style="margin-right: 100px;float: right" class="btn btn-sm btn-primary "
-                                            onclick="searchBirthday();" type="button">
-                                        <i class="ace-icon fa fa-check-circle-o"></i>
-                                        <spring:message code="student.info.serch"/>
-                                    </button>
-                                </div>
                             </td>
                         </tr>
                     </h1>
@@ -203,87 +138,33 @@
                                     <thead>
                                         <%--列表信息---->thead--%>
                                     <tr>
-                                        <th class="center">
-                                            <label class="pos-rel">
-                                                <input type="checkbox" class="ace"/>
-                                                <span class="lbl"></span>
-                                            </label>
-                                        </th>
-                                        <th></th>
-                                        <th class="hidden-480">序号</th>
-                                        <th class="hidden-480">学号</th>
-                                        <th class="hidden-480">姓名</th>
-                                        <th class="hidden-480">性别</th>
-                                        <th class="hidden-480">出生日期</th>
-                                        <th class="hidden-480">所在班级</th>
-                                        <th class="hidden-480">选修科目数</th>
-                                        <th class="hidden-480">平均分</th>
-                                        <th class="hidden-480">分数录入</th>
-                                        <th class="hidden-480">选课</th>
-                                        <th class="hidden-480">修改、删除</th>
 
+                                        <th class="hidden-480">序号</th>
+                                        <th class="hidden-480">学科名称</th>
+                                        <th class="hidden-480">选修人数</th>
+                                        <th></th>
+                                        <th class="hidden-480">平均分</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                         <%--列表信息---->tbody--%>
-                                    <c:forEach items="${studentList}" var="students">
-                                        <tr>
-                                            <td class="center">
-                                                <label class="pos-rel">
-                                                    <input type="checkbox" class="ace"/>
-                                                    <span class="lbl"></span>
-                                                </label>
-                                            </td>
-                                                <%--下拉列表信息--%>
-                                            <td class="center">
-                                                <div class="action-buttons">
-                                                    <a href="#" class="green bigger-140 show-details-btn"
-                                                       title="Show Details">
-                                                        <i class="ace-icon fa fa-angle-double-down"></i>
-                                                        <span class="sr-only"></span>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td>${students.id}</td>
-                                            <td>${students.code}</td>
-                                            <td class="hidden-480">${students.name}</td>
-                                            <td>${students.sex}</td>
-                                            <td class="hidden-480">
-                                                <fmt:formatDate value="${students.birthday}" type="date"
-                                                                pattern="yyyy-MM-dd"/>
-                                                    <%--<span class="label label-sm label-warning">Expiring</span>--%>
-                                            </td>
-                                            <td>${students.grade.gradeName}</td>
-                                            <td>
-                                                <div class="hidden-sm hidden-xs btn-group">
-                                                </div>
-                                            </td>
-                                            <td></td>
-                                            <td>
-                                                <div>
-                                                    <button class="btn btn-xs btn-info">
-                                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <button class="btn btn-xs btn-info">
-                                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <button class="btn btn-xs btn-info">
-                                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                                    </button>
-                                                <button class="btn btn-xs btn-danger" name="stuDel"
-                                                        onclick="dele(this)">
-                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                                </button>
-                                                </div>
-                                            </td>
+                                    <c:set var="index" value="0"/>
+                                    <c:forEach items="${sublist}" var="sub" varStatus="num">
+                                        <c:set var="index" value="${index+1}"/>
+                                        <td>${index}</td>
+                                        <td>${sublist[num.count-1]}</td>
+                                        <td>${numlist[num.count-1]}</td>
+                                        <%--下拉列表信息--%>
+                                        <td class="center">
+                                            <div class="action-buttons">
+                                                <a href="#" class="green bigger-140 show-details-btn"
+                                                   title="Show Details">
+                                                    <i class="ace-icon fa fa-angle-double-down"></i>
+                                                    <span class="sr-only"></span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>平均分</td>
                                         </tr>
                                         <%--下拉列表--%>
                                         <tr class="detail-row">
@@ -370,31 +251,6 @@
                                     </c:forEach>
                                     </tbody>
                                 </table>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <div class="dataTables_info" id="dynamic-table_info" role="status"
-                                             aria-live="polite">第 ${Number+1} 页 ，共${TotalElements}条
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="dataTables_paginate paging_simple_numbers"
-                                             id="dynamic-table_paginate">
-                                            <ul class="pagination">
-                                                <li class="paginate_button previous disabled"
-                                                    aria-controls="dynamic-table" tabindex="0"
-                                                    id="dynamic-table_previous"><a href="student/studentMessagePage.do?Number=${Number-1}">上一页</a></li>
-                                                <li class="paginate_button" aria-controls="dynamic-table"
-                                                    tabindex="0"><a href="student/studentMessagePage.do?Number=${Number-1}">${Number-1}</a></li>
-                                                <li class="paginate_button active " aria-controls="dynamic-table" tabindex="0">
-                                                    <a href="#">${Number}</a></li>
-                                                <li class="paginate_button " aria-controls="dynamic-table" tabindex="0">
-                                                    <a href="student/studentMessagePage.do?Number=${Number+1}">${Number+1}</a></li>
-                                                <li class="paginate_button next" aria-controls="dynamic-table"
-                                                    tabindex="0" id="dynamic-table_next"><a href="student/studentMessagePage.do?Number=${Number+1}">下一页</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
                             </div><!-- /.span -->
                         </div><!-- /.row -->
                         <!-- PAGE CONTENT ENDS -->
